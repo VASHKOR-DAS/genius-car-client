@@ -33,6 +33,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+                <a href='/login' className="mr-2 btn btn-secondary normal-case">Login</a>
                 <a href='/' className="btn btn-outline btn-secondary normal-case ">Appointment</a>
             </div>
         </div>
