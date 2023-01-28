@@ -1,10 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import loginSVG from '../../../assets/images/login/login.svg'
 import { RiFacebookFill, RiLinkedinFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
+
+    const navigate = useNavigate();
+    const { createUser, signInWithGoogle } = useContext(AuthContext);
+
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -13,6 +18,30 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(name, email, password);
+
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log('signUp user', user);
+                // reset from after signUp
+                form.reset();
+                //user successfully registered hoye gele take /login route a niye jabe
+                navigate('/login');
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     return (
@@ -32,21 +61,21 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Name</span>
                             </label>
-                            <input type="text" name='name' placeholder="Your name" className="input input-bordered" required/>
+                            <input type="text" name='name' placeholder="Your name" className="input input-bordered" required />
                         </div>
 
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Email</span>
                             </label>
-                            <input type="text" name='email' placeholder="Your email" className="input input-bordered" required/>
+                            <input type="text" name='email' placeholder="Your email" className="input input-bordered" required />
                         </div>
 
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Password</span>
                             </label>
-                            <input type="password" name='password' placeholder="Your password" className="input input-bordered" required/>
+                            <input type="password" name='password' placeholder="Your password" className="input input-bordered" required />
                         </div>
 
                         <div className="form-control mt-6">
@@ -62,7 +91,7 @@ const SignUp = () => {
 
                             <RiLinkedinFill className='cursor-pointer hover:bg-base-300 text-blue-500 rounded-full bg-gray-100 p-2 md:p-3' />
 
-                            <FcGoogle className='cursor-pointer hover:bg-base-300 text-blue-500 rounded-full bg-gray-100 p-2 md:p-3' />
+                            <FcGoogle onClick={handleGoogleSignIn} className='cursor-pointer hover:bg-base-300 text-blue-500 rounded-full bg-gray-100 p-2 md:p-3' />
                         </div>
 
                         <span className="font-bold text-gray-500">

@@ -1,11 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginSVG from '../../../assets/images/login/login.svg'
 import './Login.css'
 import { RiFacebookFill, RiLinkedinFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+
+    const {signIn} = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    // right route setup
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
 
     const handleLogin = event => {
         event.preventDefault();
@@ -13,6 +22,20 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        signIn(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log('signIn user', user);
+            // reset from after login
+            form.reset();
+            //user successfully login hoye gele take / route a niye jabe
+            navigate(from, { replace: true });
+        })
+        .catch(error => {
+            console.error(error);
+        })
+
     }
 
 
