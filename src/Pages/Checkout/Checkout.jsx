@@ -1,4 +1,3 @@
-import { error } from 'daisyui/src/colors';
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
