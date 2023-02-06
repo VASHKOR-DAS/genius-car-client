@@ -23,7 +23,10 @@ const Header = () => {
         <li className='font-semibold'><Link to='/'>Home</Link></li>
         <li className='font-semibold'><Link to='/'>About</Link></li>
         <li className='font-semibold'><Link to='/'>Services</Link></li>
-        <li className='font-semibold'><Link to='/orders'>Orders</Link></li>
+        {
+            user?.email &&
+            <li className='font-semibold'><Link to='/orders'>Orders</Link></li>
+        }
         <li className='font-semibold'><Link to='/'>Blog</Link></li>
         <li className='font-semibold'><Link to='/'>Contact</Link></li>
     </>
