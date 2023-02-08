@@ -61,11 +61,11 @@ const Login = () => {
                 // reset from after login
                 form.reset();
                 //user successfully login hoye gele take / route a niye jabe
-                // navigate(from, { replace: true });
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
-            })
+            });
 
     }
 
