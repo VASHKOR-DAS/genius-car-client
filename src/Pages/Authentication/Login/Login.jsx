@@ -8,7 +8,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
 
-    const {signIn} = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -24,17 +24,48 @@ const Login = () => {
         console.log(email, password);
 
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log('signIn user', user);
-            // reset from after login
-            form.reset();
-            //user successfully login hoye gele take / route a niye jabe
-            navigate(from, { replace: true });
-        })
-        .catch(error => {
-            console.error(error);
-        })
+            .then(result => {
+                const user = result.user;
+
+                // for jwt
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser);
+
+                // get jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        /*
+                        ata backend a hit kore kina tar console a dekhbo
+                        Genius car service running on 5000
+                        { email: 'web@ph.com' } 
+                        */
+                       console.log(data); // ai data er moddhe 2ta property ase email, token. akhon ai token ta localStorage a set korbo
+                       localStorage.setItem('genius-token', data.token);
+
+
+                    })
+
+
+
+
+
+                // reset from after login
+                form.reset();
+                //user successfully login hoye gele take / route a niye jabe
+                // navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.error(error);
+            })
 
     }
 
