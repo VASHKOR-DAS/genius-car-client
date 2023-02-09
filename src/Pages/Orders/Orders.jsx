@@ -25,7 +25,7 @@ const Orders = () => {
                 // console.log('received', data);
                 setOrders(data)
             })
-    }, [user?.email])
+    }, [user?.email, logOut])
 
 
     const handleDelete = id => {
