@@ -34,7 +34,7 @@ const Login = () => {
                 console.log(currentUser);
 
                 // get jwt token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://genius-car-server-delta-ten.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -48,10 +48,10 @@ const Login = () => {
                         Genius car service running on 5000
                         { email: 'web@ph.com' } 
                         */
-                       console.log(data); // ai data er moddhe 2ta property ase email, token. akhon ai token ta localStorage a set korbo
-                       localStorage.setItem('genius-token', data.token);
+                        console.log(data); // ai data er moddhe 2ta property ase email, token. akhon ai token ta localStorage a set korbo
+                        localStorage.setItem('genius-token', data.token);
 
-                       
+
                     })
 
 

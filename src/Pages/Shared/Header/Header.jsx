@@ -12,6 +12,7 @@ const Header = () => {
         logOut()
             .then(() => { })
             .catch(error => console.error(error));
+        localStorage.removeItem('genius-token');
     }
 
     const menuItems = <>
