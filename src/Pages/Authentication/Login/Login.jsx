@@ -51,7 +51,7 @@ const Login = () => {
                        console.log(data); // ai data er moddhe 2ta property ase email, token. akhon ai token ta localStorage a set korbo
                        localStorage.setItem('genius-token', data.token);
 
-
+                       
                     })
 
 
