@@ -4,6 +4,7 @@ import loginSVG from '../../../assets/images/login/login.svg'
 import { RiFacebookFill, RiLinkedinFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { setAuthToken } from '../../../Jwt token/auth';
 
 const SignUp = () => {
 
@@ -23,6 +24,8 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log('signUp user', user);
+                setAuthToken();
+
                 // reset from after signUp
                 form.reset();
                 //user successfully registered hoye gele take /login route a niye jabe

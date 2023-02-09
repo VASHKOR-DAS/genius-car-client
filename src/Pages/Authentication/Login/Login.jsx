@@ -3,8 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginSVG from '../../../assets/images/login/login.svg'
 import './Login.css'
 import { RiFacebookFill, RiLinkedinFill } from "react-icons/ri";
-import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import SocialLogin from '../../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
 
@@ -110,7 +110,7 @@ const Login = () => {
 
                             <RiLinkedinFill className='cursor-pointer hover:bg-base-300 text-blue-500 rounded-full bg-gray-100 p-2 md:p-3' />
 
-                            <FcGoogle className='cursor-pointer hover:bg-base-300 text-blue-500 rounded-full bg-gray-100 p-2 md:p-3' />
+                            <SocialLogin></SocialLogin>
                         </div>
 
                         <span className="font-bold text-gray-500">
